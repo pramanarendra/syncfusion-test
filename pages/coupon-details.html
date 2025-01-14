@@ -144,7 +144,16 @@
         // NOTE: allow text wrap instead of leading snug (...)
         allowTextWrap: true,
         width: "auto",
-      });
+        /*
+          NOTE: queryCellInfo can be use to add customization to every cells
+          - add checker isEmpty for all cells
+        */
+        queryCellInfo: function (args) {
+          if (args.column.field && (!args.data[args.column.field] || args.data[args.column.field] === "")) {
+            args.cell.innerHTML = "-";
+          }
+        },
+      })
 
       grid.appendTo("#Grid")
 
