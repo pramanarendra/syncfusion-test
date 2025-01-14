@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Syncfusion Components Playground</title>
+
+    <!-- CDN script and style for Syncfusion components -->
+    <!-- Essential JS 2 tailwind theme -->
+    <link href="https://cdn.syncfusion.com/ej2/28.1.33/tailwind3.css" rel="stylesheet">
+    <!-- Essential JS 2 all script -->
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+    <link href="./src/output.css" rel="stylesheet">
+</head>
+<body class="font-sans leading-relaxed max-w-7xl mx-auto p-5 text-gray-800 ">
+    <div class="bg-indigo-900 text-white p-8 rounded-lg mb-8">
+        <h1 class="text-4xl font-bold mb-2">Syncfusion Playground</h1>
+        <p class="text-lg">My Learning Notes & Documentation of Syncfusion components</p>
+    </div>
+
+    <nav class="bg-gray-100 p-4 rounded-lg mb-8">
+        <ul class="flex gap-4 list-none p-0 m-0">
+            <li><a href="#getting-started" class="text-indigo-900 font-medium hover:text-indigo-700">Getting Started</a></li>
+            <li><a href="#grid" class="text-indigo-900 font-medium hover:text-indigo-700">Grid Component</a></li>
+        </ul>
+    </nav>
+
+    <div id="getting-started" class="bg-white p-8 rounded-lg shadow-md mb-8">
+        <h2 class="text-3xl font-bold mb-4">Getting Started</h2>
+        <p class="mb-4">For quick setup of Syncfusion, you can use CDN link and script for all components:</p>
+        
+        <div class="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+            <pre><code>// Essential JS 2 material theme
+&lt;link href="https://cdn.syncfusion.com/ej2/28.1.33/tailwind3.css" rel="stylesheet" type="text/css"&lt;/link&gt;
+// Essential JS 2 all script
+&lt;script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4">
+            <strong class="block mb-1">Notes:</strong> Local script and style requires us to make free trial account and download Essential Studio JavaScript
+        </div>
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-4">
+            <strong class="block mb-1">Style Theme:</strong> Syncfusion components available in a few different themes (Material, Bootstrap, Tailwind)
+        </div>
+    </div>
+
+    <div id="grid" class="bg-white p-8 rounded-lg shadow-md mb-8">
+        <h2 class="text-3xl font-bold mb-4">Grid Component</h2>
+        <p class="mb-4">The Grid component was one of the first things I learned. Here's my implementation notes:</p>
+
+        <h3 class="text-2xl font-bold mb-3">Basic Setup</h3>
+        <div class="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+            <pre><code>let grid = new ej.grids.Grid({
+    dataSource: data,
+    columns: [
+        { field: 'id', headerText: 'ID' },
+        { field: 'name', headerText: 'Name' },
+        { field: 'age', headerText: 'Age' }
+    ],
+    allowPaging: true,
+    pageSettings: { pageSize: 10 }
+});</code></pre>
+        </div>
+
+        <div class="bg-yellow-100 border-l-4 border-yellow-400 p-4 mb-4">
+            <strong class="block mb-1">Note from my experience:</strong>Without direct utility class styling, it seems using Tailwind vs vanilla CSS doesn't seems that different
+        </div>
+
+        <div id="Grid"></div>
+    </div>
+
+    <script src="es5-datasource.js" type="text/javascript"></script>
+    <script src="index.js" type="text/javascript"></script>
+</body>
+</html>

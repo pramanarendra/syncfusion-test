@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.e-grid .e-headercell {
+  @apply bg-gray-800 text-white;
+}
+.e-grid .e-headercell .e-headertext {
+  @apply font-bold text-sm;
+}
+.e-grid .e-row {
+  @apply bg-white;
+}
+.e-grid .e-row:nth-child(even) {
+  @apply bg-gray-50;
+}
+.e-grid .e-row:hover {
+  @apply bg-gray-200;
+}
