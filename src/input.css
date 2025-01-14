@@ -2,18 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* Grid */
+.e-table {
+  @apply border-collapse;
+}
 .e-grid .e-headercell {
-  @apply bg-gray-800 text-white;
+  @apply bg-gray-100 text-gray-500;
 }
+
 .e-grid .e-headercell .e-headertext {
-  @apply font-bold text-sm;
+  @apply font-normal;
 }
+
 .e-grid .e-row {
   @apply bg-white;
 }
+
 .e-grid .e-row:nth-child(even) {
   @apply bg-gray-50;
 }
+
 .e-grid .e-row:hover {
   @apply bg-gray-200;
+}
+
+.e-grid .e-icon-ascending::before {
+  content: '\e822';
+}
+
+.e-grid .e-icon-descending::before {
+  content: '\e7fe';
+}
+
+.e-headercell[aria-sort="none"] .e-icons::before {
+  @apply text-gray-400;
+  content: '\e822';
 }

@@ -13,7 +13,7 @@ var data = [
     reference: '',
     notes: '',
     createdBy: 'SYSTEM',
-    createdAt: '12 December 2024 14:42',
+    createdAt: '12/12/2024 14:42',
     updatedBy: '',
     updatedAt: '',
     status: 'Saved',
@@ -21,10 +21,10 @@ var data = [
   },
   {
     logHistoryUrl: 'https://ej2.syncfusion.com/javascript/documentation/introduction',
-    progress: 5,
+    progress: 3,
     totalProgress: 7,
-    approvalStatus: 'Approved',
-    securitiesId: 'SIPTRO01DCN1',
+    approvalStatus: 'Rejected',
+    securitiesId: 'SIPTRO01DCN2',
     serialNumber: [1, 2, 3, 4, 5],
     periodFrom: ['13/12/2024', '13/03/2025', '13/06/2025', '13/09/2025', '13/12/2025'],
     periodTo: ['12/03/2025', '12/06/2025', '12/09/2025', '12/12/2025', '12/03/2026'],
@@ -33,10 +33,10 @@ var data = [
     reference: '',
     notes: '',
     createdBy: 'SYSTEM',
-    createdAt: '12 December 2024 14:42',
+    createdAt: '12/13/2024 14:42',
     updatedBy: '',
     updatedAt: '',
-    status: 'Saved',
+    status: 'Draft',
     log: 'Created at 12/12/2024 14:42 by SYSTEM'
   }
 ];

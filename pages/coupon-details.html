@@ -48,11 +48,10 @@
           </div>
         </script>
         <script id="progress" type="text/x-template">
-          <div>
-            <a href="https://www.google.com/search?q=${approvalStatus}" target="_blank"  >
-              ${progress}/${totalProgress}
-            </a>
-          </div>
+          ${progress}/${totalProgress}
+        </script>
+        <script id="createdAt" type="text/x-template">
+          ${ formatLongDate(createdAt) }
         </script>
 
         <!-- NOTE: This is a placeholder to render syncfusion component based on its id -->
@@ -65,7 +64,7 @@
 
     <script>
       // NOTE: inject the component to the HTML
-      ej.grids.Grid.Inject(ej.grids.Page)
+      ej.grids.Grid.Inject(ej.grids.Sort)
       var grid = new ej.grids.Grid({
         dataSource: data,
         /*
@@ -81,22 +80,27 @@
             width: 50,
             textAlign: "Center",
             template: "#index",
+            allowSorting: false
           },
           {
             headerText: "Log History",
             width: 100,
-            template: "#logHistory"
+            template: "#logHistory",
+            allowSorting: false
           },
           {
+            field: "progress",
             headerText: "Progress",
             width: 100,
             template: "#progress",
+            allowSorting: false
           },
           {
             field: "approvalStatus",
             headerText: "Approval Status",
             width: 100,
             type: "String",
+            allowSorting: false
           },
           {
             field: "securitiesId",
@@ -132,17 +136,25 @@
           { field: "reference", headerText: "Reference", width: 100 },
           { field: "notes", headerText: "Notes", width: 100 },
           { field: "createdBy", headerText: "Created By", width: 100 },
-          { field: "createdAt", headerText: "Created At", width: 100 },
+          {
+            field: "createdAt",
+            headerText: "Created At",
+            width: 100,
+            template: '#createdAt'
+          },
           { field: "updatedBy", headerText: "Updated By", width: 100 },
           { field: "updatedAt", headerText: "Updated At", width: 100 },
           { field: "status", headerText: "Status", width: 100 },
           { field: "log", headerText: "Log", width: 100 },
         ],
+        // NOTE: to allow sorting on a column, make sure it has field value
+        allowSorting: true,
         // NOTE: allow pagination
         allowPaging: true,
         pageSettings: { pageSize: 7 },
         // NOTE: allow text wrap instead of leading snug (...)
         allowTextWrap: true,
+        textWrapSettings: { wrapMode: 'Both' },
         width: "auto",
         /*
           NOTE: queryCellInfo can be use to add customization to every cells
@@ -164,6 +176,21 @@
 
       function formatArray(value) {
         return value.join("; ")
+      }
+
+      function formatLongDate(date) {
+        const options = {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false,
+        }
+        const formattedDate = new Intl.DateTimeFormat('id-ID', options)
+          .format(new Date(date))
+          .replace('pukul ', '')
+        return formattedDate
       }
     </script>
   </body>
