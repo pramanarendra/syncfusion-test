@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Syncfusion Components Playground</title>
+
+    <!-- CDN script and style for Syncfusion components -->
+    <!-- Essential JS 2 tailwind theme -->
+    <link href="https://cdn.syncfusion.com/ej2/28.1.33/tailwind3.css" rel="stylesheet" />
+    <!-- Essential JS 2 all script -->
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js" type="text/javascript"></script>
+    <link href="../src/output.css" rel="stylesheet" />
+  </head>
+
+  <body class="font-sans leading-relaxed max-w-7xl mx-auto p-5 text-gray-800">
+    <div id="grid" class="bg-white p-8 rounded-lg shadow-md mb-8">
+      <h2 class="text-3xl font-bold mb-4">Coupon Details</h2>
+
+      <div id="container">
+        <!--
+          NOTE: The value of id is connected to template fields that are defined in columns
+          This can be used to:
+          - Render custom data using function
+          - Custom html tag structure
+          - Render child compopnent
+          - Direct styling using tailwind utility class
+        -->
+        <script id="index" type="text/x-template">
+          ${ getIndex(index) }
+        </script>
+        <script id="serialNumber" type="text/x-template">
+          ${ formatArray(serialNumber) }
+        </script>
+        <script id="periodFrom" type="text/x-template">
+          ${ formatArray(periodFrom) }
+        </script>
+        <script id="periodTo" type="text/x-template">
+          ${ formatArray(periodTo) }
+        </script>
+        <script id="paymentDate" type="text/x-template">
+          ${ formatArray(paymentDate) }
+        </script>
+        <script id="logHistory" type="text/x-template">
+          <div>
+            <a href="${logHistoryUrl}" target="_blank" class="text-indigo-400">Log History</a>
+          </div>
+        </script>
+        <script id="progress" type="text/x-template">
+          <div>
+            <a href="https://www.google.com/search?q=${approvalStatus}" target="_blank"  >
+              ${progress}/${totalProgress}
+            </a>
+          </div>
+        </script>
+
+        <!-- NOTE: This is a placeholder to render syncfusion component based on its id -->
+        <div id="Grid"></div>
+      </div>
+    </div>
+
+    <!-- NOTE: import the data -->
+    <script src="../data/coupons.js" type="text/javascript"></script>
+
+    <script>
+      // NOTE: inject the component to the HTML
+      ej.grids.Grid.Inject(ej.grids.Page)
+      var grid = new ej.grids.Grid({
+        dataSource: data,
+        /*
+          NOTE: there are several fields of column that can be used
+          - headerText > name of the header
+          - width > width value is relative to total table width
+          - textAlign > aligning text
+          - template > bind the column to the HTML template
+        */
+        columns: [
+          {
+            headerText: "No",
+            width: 50,
+            textAlign: "Center",
+            template: "#index",
+          },
+          {
+            headerText: "Log History",
+            width: 100,
+            template: "#logHistory"
+          },
+          {
+            headerText: "Progress",
+            width: 100,
+            template: "#progress",
+          },
+          {
+            field: "approvalStatus",
+            headerText: "Approval Status",
+            width: 100,
+            type: "String",
+          },
+          {
+            field: "securitiesId",
+            headerText: "Securities ID",
+            width: 100,
+            type: "String",
+          },
+          {
+            field: "serialNumber",
+            headerText: "Serial Number",
+            width: 100,
+            template: "#serialNumber",
+          },
+          {
+            field: "periodFrom",
+            headerText: "Period From",
+            width: 100,
+            template: "#periodFrom",
+          },
+          {
+            field: "periodTo",
+            headerText: "Period To",
+            width: 100,
+            template: "#periodTo",
+          },
+          {
+            field: "paymentDate",
+            headerText: "Payment Date",
+            width: 100,
+            template: "#paymentDate",
+          },
+          { field: "createdDate", headerText: "Created Date", width: 100 },
+          { field: "reference", headerText: "Reference", width: 100 },
+          { field: "notes", headerText: "Notes", width: 100 },
+          { field: "createdBy", headerText: "Created By", width: 100 },
+          { field: "createdAt", headerText: "Created At", width: 100 },
+          { field: "updatedBy", headerText: "Updated By", width: 100 },
+          { field: "updatedAt", headerText: "Updated At", width: 100 },
+          { field: "status", headerText: "Status", width: 100 },
+          { field: "log", headerText: "Log", width: 100 },
+        ],
+        // NOTE: allow pagination
+        allowPaging: true,
+        pageSettings: { pageSize: 7 },
+        // NOTE: allow text wrap instead of leading snug (...)
+        allowTextWrap: true,
+        width: "auto",
+      });
+
+      grid.appendTo("#Grid")
+
+      // NOTE: use functions to format the cells value
+      function getIndex(value) {
+        return parseInt(value) + 1
+      }
+
+      function formatArray(value) {
+        return value.join("; ")
+      }
+    </script>
+  </body>
+</html>
