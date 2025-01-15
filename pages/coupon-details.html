@@ -15,9 +15,11 @@
   </head>
 
   <body class="font-sans leading-relaxed max-w-7xl mx-auto p-5 text-gray-800">
+    <div class="flex">
+      <h1 class="font-semibold text-xl pr-4 border-r-2 border-gray-200">Coupon Detail</h1>
+      <ul id="breadcrumb" class="pl-3 h-full"></ul>
+    </div>
     <div id="grid" class="bg-white p-8 rounded-lg shadow-md mb-8">
-      <h2 class="text-3xl font-bold mb-4">Coupon Details</h2>
-
       <div id="container">
         <!--
           NOTE: The value of id is connected to template fields that are defined in columns
@@ -63,10 +65,17 @@
     <script src="../data/coupons.js" type="text/javascript"></script>
 
     <script>
+      // Breadcrumbs Component
+      ej.base.enableRipple(true);
+      new ej.navigations.Breadcrumb({
+          enableNavigation: false,
+          separatorTemplate: '<span>-</span>'
+      }, '#breadcrumb')
       /*
         NOTE: inject the component to the HTML 
         - You can inject multiple module
       */
+      // Grid Component
       ej.grids.Grid.Inject(
         ej.grids.Sort,
         ej.grids.Toolbar,
@@ -140,20 +149,52 @@
             width: 100,
             template: "#paymentDate",
           },
-          { field: "createdDate", headerText: "Created Date", width: 100 },
-          { field: "reference", headerText: "Reference", width: 100 },
-          { field: "notes", headerText: "Notes", width: 100 },
-          { field: "createdBy", headerText: "Created By", width: 100 },
+          {
+            field: "createdDate",
+            headerText: "Created Date",
+            width: 100
+          },
+          {
+            field: "reference",
+            headerText: "Reference",
+            width: 100
+          },
+          {
+            field: "notes",
+            headerText: "Notes",
+            width: 100
+          },
+          {
+            field: "createdBy",
+            headerText: "Created By",
+            width: 120
+          },
           {
             field: "createdAt",
             headerText: "Created At",
-            width: 100,
+            width: 120,
             template: '#createdAt'
           },
-          { field: "updatedBy", headerText: "Updated By", width: 100 },
-          { field: "updatedAt", headerText: "Updated At", width: 100 },
-          { field: "status", headerText: "Status", width: 100 },
-          { field: "log", headerText: "Log", width: 100 },
+          {
+            field: "updatedBy",
+            headerText: "Updated By",
+            width: 120
+          },
+          {
+            field: "updatedAt",
+            headerText: "Updated At",
+            width: 120
+          },
+          {
+            field: "status",
+            headerText: "Status",
+            width: 100
+          },
+          {
+            field: "log",
+            headerText: "Log",
+            width: 100
+          },
         ],
         // NOTE: to allow sorting on a column, make sure it has field value
         allowSorting: true,
