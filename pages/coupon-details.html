@@ -110,8 +110,23 @@
         ej.grids.Sort,
         ej.grids.Toolbar,
         ej.grids.ColumnChooser,
-        ej.grids.Page
+        ej.grids.Page,
+        ej.grids.CommandColumn,
+        ej.grids.Edit
       )
+
+      var commands =  [
+        { type: 'Edit', buttonOption: { cssClass: 'e-flat', iconCss: 'e-edit e-icons' } },
+        { type: 'Delete', buttonOption: { cssClass: 'e-flat', iconCss: 'e-delete e-icons' } },
+        { type: 'Save', buttonOption: { cssClass: 'e-flat', iconCss: 'e-update e-icons' } },
+        { type: 'Cancel', buttonOption: { cssClass: 'e-flat', iconCss: 'e-cancel-icon e-icons' } }
+      ]
+
+      var approvalOptions =  [
+        { approvalName: 'Approved', approvalId: '1' },
+        { approvalName: 'Rejected', approvalId: '2' }
+      ]
+
       var grid = new ej.grids.Grid({
         dataSource: data,
         /*
@@ -127,103 +142,136 @@
             width: 50,
             textAlign: "Center",
             template: "#index",
-            allowSorting: false
+            isIdentity: true
           },
           {
+            headerText: 'Commands',
+            width: 120,
+            commands: commands
+           },
+          {
+            field: 'logHistoryUrl',
             headerText: "Log History",
             width: 100,
             template: "#logHistory",
-            allowSorting: false
+            allowSorting: false,
+            allowEditing: false
           },
           {
             field: "progress",
             headerText: "Progress",
             width: 100,
             template: "#progress",
-            allowSorting: false
+            allowSorting: false,
+            allowEditing: false
           },
           {
             field: "approvalStatus",
             headerText: "Approval Status",
             width: 100,
             type: "String",
-            allowSorting: false
+            allowSorting: false,
+            editType: 'dropdownedit',
+            validationRules: { required: true },
+            // NOTE: custom dropdown editing
+            edit: {
+              params: {
+                dataSource: new ej.data.DataManager(approvalOptions),
+                fields: { text: 'approvalName', value: 'approvalName' },
+                query:  new ej.data.Query(),
+                actionComplete: () => false
+              },
+            }
           },
           {
             field: "securitiesId",
             headerText: "Securities ID",
             width: 120,
             type: "String",
+            isPrimaryKey: 'true'
           },
           {
             field: "serialNumber",
             headerText: "Serial Number",
             width: 100,
             template: "#serialNumber",
+            allowEditing: false
           },
           {
             field: "periodFrom",
             headerText: "Period From",
             width: 100,
             template: "#periodFrom",
+            allowEditing: false
           },
           {
             field: "periodTo",
             headerText: "Period To",
             width: 100,
             template: "#periodTo",
+            allowEditing: false
           },
           {
             field: "paymentDate",
             headerText: "Payment Date",
             width: 100,
             template: "#paymentDate",
+            allowEditing: false
           },
           {
             field: "createdDate",
             headerText: "Created Date",
-            width: 100
+            width: 100,
+            allowEditing: false
           },
           {
             field: "reference",
             headerText: "Reference",
-            width: 100
+            width: 100,
+            allowEditing: false
           },
           {
             field: "notes",
             headerText: "Notes",
-            width: 100
+            width: 100,
+            allowEditing: false
           },
           {
             field: "createdBy",
             headerText: "Created By",
-            width: 120
+            width: 120,
+            allowEditing: false
           },
           {
             field: "createdAt",
             headerText: "Created At",
             width: 120,
-            template: '#createdAt'
+            template: '#createdAt',
+            allowEditing: false
           },
           {
             field: "updatedBy",
             headerText: "Updated By",
-            width: 120
+            width: 120,
+            allowEditing: false
           },
           {
             field: "updatedAt",
             headerText: "Updated At",
-            width: 120
+            width: 120,
+            allowEditing: false
           },
           {
             field: "status",
             headerText: "Status",
-            width: 100
+            width: 100,
+            allowEditing: false
           },
           {
             field: "log",
             headerText: "Log",
-            width: 100
+            width: 100,
+            allowEditing: false
           },
         ],
         // NOTE: to allow sorting on a column, make sure it has field value
@@ -238,6 +286,8 @@
         width: "auto",
         showColumnChooser: true,
         toolbar: ['ColumnChooser'],
+        editSettings: { allowEditing: true, allowDeleting: true },
+        actionComplete: updateData,
         /*
           NOTE: queryCellInfo can be use to add customization to every cells
           - add checker isEmpty for all cells
@@ -257,6 +307,9 @@
       }
 
       function formatArray(value) {
+        if(typeof value === 'string') {
+          return value.split(',').join('; ')
+        }
         return value.join("; ")
       }
 
@@ -273,6 +326,24 @@
           .format(new Date(date))
           .replace('pukul ', '')
         return formattedDate
+      }
+
+      function updateData(args) {
+        if (args.requestType === 'save' && !args.cancel) {
+          const editedData = args.data;
+
+          editedData.updatedAt = new Date().toISOString()
+          editedData.updatedBy = 'Current User'
+          
+          const rowIndex = grid.dataSource.findIndex(item => 
+            item.securitiesId === editedData.securitiesId
+          );
+          
+          if (rowIndex > -1) {
+            grid.dataSource[rowIndex] = { ...grid.dataSource[rowIndex], ...editedData }
+            grid.refresh()
+          }
+        }
       }
 
       var initialGridLoad = true;
