@@ -19,7 +19,28 @@
       <h1 class="font-semibold text-xl pr-4 border-r-2 border-gray-200">Coupon Detail</h1>
       <ul id="breadcrumb" class="pl-3 h-full"></ul>
     </div>
-    <div id="grid" class="bg-white p-8 rounded-lg shadow-md mb-8">
+
+    <div id='table-options' class="mt-8">
+      <div class="e-acrdn-item e-select e-expand-state e-selected e-active"> <!-- Add e-expand class here -->
+        <div>
+          <div>
+            Table Options
+          </div>
+        </div>
+        <div>
+          <div>
+            Column
+          </div>
+          <div>
+            Filter
+          </div>
+          <div>
+            Value
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="grid" class="bg-white p-8 rounded-lg shadow-md my-8">
       <div id="container">
         <!--
           NOTE: The value of id is connected to template fields that are defined in columns
@@ -71,6 +92,15 @@
           enableNavigation: false,
           separatorTemplate: '<span>-</span>'
       }, '#breadcrumb')
+
+      // Accordion Component
+      var accordion = new ej.navigations.Accordion({
+        expandMode: 'Single',
+        expandedIndices: [0]
+      })
+      accordion.appendTo('#table-options')
+      
+
       /*
         NOTE: inject the component to the HTML 
         - You can inject multiple module
