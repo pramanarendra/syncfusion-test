@@ -27,6 +27,7 @@
   @apply bg-gray-200;
 }
 
+/* Grid: sorting icons */
 .e-grid .e-icon-ascending::before {
   content: '\e822';
 }
@@ -38,4 +39,17 @@
 .e-headercell[aria-sort="none"] .e-icons::before {
   @apply text-gray-400;
   content: '\e822';
+}
+
+/* Grid: toolbar controls */
+.e-ccdlg.e-cc.e-control.e-dialog.e-lib.e-popup {
+  @apply !left-0;
+}
+
+.e-toolbar-right .e-pagesizes {
+  @apply flex flex-row-reverse items-center gap-2 h-full mr-2;
+}
+
+.e-toolbar-right .e-pagesizes .e-pagerdropdown .e-input-group {
+  @apply !w-24;
 }

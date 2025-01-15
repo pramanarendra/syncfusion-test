@@ -801,6 +801,8 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
 }
 
+/* Grid: sorting icons */
+
 .e-grid .e-icon-ascending::before {
   content: '\e822';
 }
@@ -813,6 +815,25 @@ video {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity, 1));
   content: '\e822';
+}
+
+/* Grid: toolbar controls */
+
+.e-ccdlg.e-cc.e-control.e-dialog.e-lib.e-popup {
+  left: 0px !important;
+}
+
+.e-toolbar-right .e-pagesizes {
+  margin-right: 0.5rem;
+  display: flex;
+  height: 100%;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.e-toolbar-right .e-pagesizes .e-pagerdropdown .e-input-group {
+  width: 6rem !important;
 }
 
 .hover\:text-indigo-700:hover {

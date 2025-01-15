@@ -63,8 +63,16 @@
     <script src="../data/coupons.js" type="text/javascript"></script>
 
     <script>
-      // NOTE: inject the component to the HTML
-      ej.grids.Grid.Inject(ej.grids.Sort)
+      /*
+        NOTE: inject the component to the HTML 
+        - You can inject multiple module
+      */
+      ej.grids.Grid.Inject(
+        ej.grids.Sort,
+        ej.grids.Toolbar,
+        ej.grids.ColumnChooser,
+        ej.grids.Page
+      )
       var grid = new ej.grids.Grid({
         dataSource: data,
         /*
@@ -105,7 +113,7 @@
           {
             field: "securitiesId",
             headerText: "Securities ID",
-            width: 100,
+            width: 120,
             type: "String",
           },
           {
@@ -151,11 +159,14 @@
         allowSorting: true,
         // NOTE: allow pagination
         allowPaging: true,
-        pageSettings: { pageSize: 7 },
+        pageSettings: { pageSizes: true, pageSize: 10 },
+        dataBound: dataBound,
         // NOTE: allow text wrap instead of leading snug (...)
         allowTextWrap: true,
         textWrapSettings: { wrapMode: 'Both' },
         width: "auto",
+        showColumnChooser: true,
+        toolbar: ['ColumnChooser'],
         /*
           NOTE: queryCellInfo can be use to add customization to every cells
           - add checker isEmpty for all cells
@@ -191,6 +202,40 @@
           .format(new Date(date))
           .replace('pukul ', '')
         return formattedDate
+      }
+
+      var initialGridLoad = true;
+
+      // NOTE: render page size at the top of the grid
+      // https://ej2.syncfusion.com/javascript/documentation/grid/paging#render-pager-at-the-top-of-the-grid
+      function dataBound() {
+        if (initialGridLoad) {
+          initialGridLoad = false;
+
+          // Find the pager (page size dropdown)
+          var pager = document.getElementsByClassName('e-pagesizes');
+          var columns = document.getElementsByClassName('e-cc');
+          
+          // Find the e-toolbar-right section
+          var toolbarRight = document.getElementsByClassName('e-toolbar-right');
+          var toolbarLeft = document.getElementsByClassName('e-toolbar-left');
+
+          // Check if e-toolbar-right exists
+          if (toolbarRight.length > 0 && pager.length > 0) {
+            // Append the pager to the e-toolbar-right section
+            toolbarRight[0].appendChild(pager[0]);
+          }
+          if (toolbarLeft.length > 0 && columns.length > 0) {
+            // Append the pager to the e-toolbar-right section
+            toolbarLeft[0].appendChild(columns[0]);
+          }
+          var element = document.querySelector('.e-pagerconstant .e-constant');
+
+          // Change its content
+          if (element) {
+            element.textContent = 'Show Entries';
+          }
+        }
       }
     </script>
   </body>
