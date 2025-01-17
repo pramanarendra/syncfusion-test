@@ -36,11 +36,6 @@
   content: '\e7fe';
 }
 
-.e-headercell[aria-sort="none"] .e-icons::before {
-  @apply text-gray-400;
-  content: '\e822';
-}
-
 /* Grid: toolbar controls */
 .e-ccdlg.e-cc.e-control.e-dialog.e-lib.e-popup {
   @apply !left-0;
